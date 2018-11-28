@@ -24,7 +24,7 @@ module Api
 
       def update
         if @user.update(user_params)
-          render json: @user
+          render json: @user.as_json({:include => :user_relations})
         else
           render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
         end
@@ -35,7 +35,7 @@ module Api
       end
 
       def show
-        render json: @user
+        render json: @user.as_json({:include => :user_relations})
       end
 
       def current
